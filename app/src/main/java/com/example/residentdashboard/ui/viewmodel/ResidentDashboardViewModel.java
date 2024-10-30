@@ -7,13 +7,29 @@ import com.example.residentdashboard.data.model.Event;
 import com.example.residentdashboard.data.model.ServiceRequest;
 import com.example.residentdashboard.data.repository.ResidentRepository;
 import java.util.List;
-
+/**
+ * ViewModel for the Resident Dashboard, managing and preparing data related to parking slots, events,
+ * and service requests for display in the UI.
+ * @author Saon
+ */
 public class ResidentDashboardViewModel extends ViewModel {
+
+    /** Repository instance providing resident-related data */
     private ResidentRepository repository;
+
+    /** LiveData list of parking slots */
     private MutableLiveData<List<ParkingSlot>> parkingSlots;
+
+    /** LiveData list of community events */
     private MutableLiveData<List<Event>> events;
+
+    /** LiveData list of service requests */
     private MutableLiveData<List<ServiceRequest>> serviceRequests;
 
+    /**
+     * Initializes the ViewModel, loading data from the repository and populating
+     * LiveData objects for parking slots, events, and service requests.
+     */
     public ResidentDashboardViewModel() {
         repository = new ResidentRepository();
         parkingSlots = new MutableLiveData<>(repository.getParkingSlots());
@@ -21,7 +37,30 @@ public class ResidentDashboardViewModel extends ViewModel {
         serviceRequests = new MutableLiveData<>(repository.getServiceRequests());
     }
 
-    public LiveData<List<ParkingSlot>> getParkingSlots() { return parkingSlots; }
-    public LiveData<List<Event>> getEvents() { return events; }
-    public LiveData<List<ServiceRequest>> getServiceRequests() { return serviceRequests; }
+    /**
+     * Returns a LiveData list of {@code ParkingSlot} objects to be observed by the UI.
+     *
+     * @return LiveData containing a list of parking slots
+     */
+    public LiveData<List<ParkingSlot>> getParkingSlots() {
+        return parkingSlots;
+    }
+
+    /**
+     * Returns a LiveData list of {@code Event} objects to be observed by the UI.
+     *
+     * @return LiveData containing a list of events
+     */
+    public LiveData<List<Event>> getEvents() {
+        return events;
+    }
+
+    /**
+     * Returns a LiveData list of {@code ServiceRequest} objects to be observed by the UI.
+     *
+     * @return LiveData containing a list of service requests
+     */
+    public LiveData<List<ServiceRequest>> getServiceRequests() {
+        return serviceRequests;
+    }
 }
